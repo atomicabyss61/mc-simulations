@@ -73,3 +73,27 @@ plt.show()
 
 
 #### Math.Boost proposal distribution
+Here is a wrapper to the Boost Math library distribution that allows them to passed as proposal distributions. Note the template forces the concept constraint of the ```Dist``` type defined in the MC_simulations.hpp file.
+```
+template <typename Dist>
+class BoostMathWrapper {
+public:
+    BoostMathWrapper(const Dist& dist, double seed)
+        : dist_(dist), gen_(seed), uniform_(0.0, 1.0) {}
+
+    // Sample using inverse CDF (quantile function)
+    double sample(double u) {
+        return boost::math::quantile(dist_, u);
+    }
+
+    // Density function
+    double density(double x) {
+        return boost::math::pdf(dist_, x);
+    }
+
+private:
+    Dist dist_;
+    std::mt19937 gen_;
+    std::uniform_real_distribution<> uniform_;
+};
+```
