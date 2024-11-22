@@ -15,19 +15,11 @@ class Unif_Dist
 {
 public:
     double lower = 0, upper = 1;
-    Unif_Dist(double _lower, double _upper) : lower(_lower), upper(_upper)
-    {
-    }
+    Unif_Dist(double _lower, double _upper) : lower(_lower), upper(_upper) {}
 
-    double sample(double x)
-    {
-        return (x * (upper - lower)) + lower;
-    }
+    double sample(double x) { return (x * (upper - lower)) + lower; }
 
-    double density(double x)
-    {
-        return 1 / (upper - lower);
-    }
+    double density(double x) { return 1 / (upper - lower); }
 };
 ```
 
